@@ -7,4 +7,14 @@
 spring:
   application.name: Lab2 Chat
   main.web-application-type: none     # Do not start a web server.
+  ai:
+      retry:
+        max-attempts: 1                  # Fail fast on errors.
+        on-client-errors: false           # No point in retrying client errors.
+      ollama:
+        base-url: http://127.0.0.1:11435  # Ollama server URL.
+        chat:
+          enabled: true              # Enable chat functionality.
+          options:
+            model: llama3.2:3b
 

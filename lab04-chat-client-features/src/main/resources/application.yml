@@ -74,5 +74,5 @@ spring:
       chat:
         enabled: true
         options:
-          model: mistral  # Adjust as needed.
+          model: llama3.2:1b  # Adjust as needed.
 

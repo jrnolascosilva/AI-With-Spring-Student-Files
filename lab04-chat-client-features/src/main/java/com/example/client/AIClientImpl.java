@@ -14,8 +14,10 @@ public class AIClientImpl implements AIClient {
 
     //  TODO-04: Define a member variable of type InMemoryChatMemory.
     //  Initialize it with a new instance of InMemoryChatMemory.
+    private InMemoryChatMemory inMemoryChatMemory = new InMemoryChatMemory();
 
     String conversationKey = AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
+    private final MessageChatMemoryAdvisor messageChatMemoryAdvisor = new MessageChatMemoryAdvisor(inMemoryChatMemory);
 
     //  TODO-05: Defined a member variable of type MessageChatMemoryAdvisor.
     //  Initialize it with a new instance of MessageChatMemoryAdvisor 
@@ -28,6 +30,7 @@ public class AIClientImpl implements AIClient {
             //  TODO-06: Alter this ChatClient.
             //  Use the .defaultAdvisors() method to add the 
             //  MessageChatMemoryAdvisor defined above.
+                .defaultAdvisors(messageChatMemoryAdvisor)
 
             .build();
     }
@@ -45,7 +48,7 @@ public class AIClientImpl implements AIClient {
                 // Use the AdvisorSpec's .param() method to add a parameter identifying the conversation.
                 // The parameter key should be the conversationKey defined above.
                 // The parameter value should be the conversationId passed to this method.
-
+                    .advisors( advisorSpec -> advisorSpec.param(conversationKey, conversationId))
                 .call()
                 .content();
     }

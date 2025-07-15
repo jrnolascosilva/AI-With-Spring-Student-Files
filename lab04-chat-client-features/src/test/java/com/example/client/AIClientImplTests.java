@@ -14,7 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 //  For standard OpenAI,        use "openai".
 //  For Ollama,                 use "ollama".
 @SpringBootTest
-@ActiveProfiles("xxxxx")
+@ActiveProfiles("ollama")
 public class AIClientImplTests {
 
     @Autowired AIClient client;
@@ -26,7 +26,6 @@ public class AIClientImplTests {
     //  Move on to the next step to fix the error.
 
     @Test
-    @Disabled
     void testConversationalChat() {
 
         int conversation1Id = 111;
@@ -65,7 +64,6 @@ public class AIClientImplTests {
     //  Move on to the next step to add to the information retrieved about each state. 
 
     @Test
-    @Disabled
     public void testRetrieve() {
 
         StateData stateData = client.retrieve("Michigan");
