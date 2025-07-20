@@ -6,7 +6,11 @@ package com.example.client;
 //  area in square miles, population, 
 //  famous for, state bird, state flower, state motto, etc.
 
+import org.springframework.context.annotation.Description;
+
 public record StateData(
-    String stateName, 
+    @Description("Name of the state")
+    String stateName,
+    @Description("Name of the capital city")
     String capitalCity
     ) {}
