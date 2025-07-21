@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.util.function.Function;
 
+import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ import com.example.client.AIClient;
 //  Set its name to "stockService" to align with the callback function from the earlier step.
 //  Use the @Description annotation to provide a helpful description for the OpenAI Client object.
 
+@Description("Provides stock information by ticker symbol")
+@Service
 public class StockService implements Function<com.example.service.StockService.Request, com.example.service.StockService.Response> {
 
 	public static Double price = Math.round(Math.random()*800)/100.0;
@@ -22,17 +25,18 @@ public class StockService implements Function<com.example.service.StockService.R
 	//  These structures will be understood by the OpenAI client software.
 	//  Notice the apply() method, this will be invoked by the OpenAI client
 	//	automatically when the response is returned from the server:
-	
+
     public record Request(String symbol) {}
     public record Response(String symbol, Double price, Integer volume, String currency) {}
 
+	@Tool(description = "Get the current stock price, volume, and currency for a given stock symbol")
 	public Response apply(Request request) {
 		//	For now, just return a hard-coded response:
 		return new Response(request.symbol(),price,volume, "USD");
-	}    
+	}
 
     @Autowired AIClient client;
-	
+
 	public String getCompanySummary(String symbol) {
 		return client.callApi(
 			"Provide a description of the company with stock ticker symbol '%s'".formatted(symbol)

@@ -6,8 +6,26 @@
   # Set `spring.ai.openai.chat.enabled` to true to enable the chat model.
   # Set `spring.ai.openai.chat.options.model` to "gpt-35-turbo" to use the GPT-3.5 model, or allow it to default.
   
-spring:
-  application.name: Lab06 Local Functions
-  main.web-application-type: none     # Do not start a web server.
+  # Configuration for running the application with Ollama and the gemma3:4b model
+  spring:
+    application:
+      name: "Lab06 Ollama Functions"
+    main:
+      web-application-type: none     # Do not start a web server.
+    ai:
+      # General AI settings for fast failure on errors
+      retry:
+        max-attempts: 1
+        on-client-errors: false
+
+      # --- Ollama Configuration ---
+      ollama:
+        # This should point to your running Ollama instance.
+        base-url: http://localhost:11434
+        chat:
+          options:
+            # Specify the model you want to use.
+            # Make sure you have pulled this model locally first!
+            model: llama3.2 #gemma3:4b
 
 
