@@ -12,6 +12,10 @@
       name: "Lab06 Ollama Functions"
     main:
       web-application-type: none     # Do not start a web server.
+    jackson:
+      deserialization:
+        # This makes your app more robust against extra fields from the AI
+        fail-on-unknown-properties: false
     ai:
       # General AI settings for fast failure on errors
       retry:

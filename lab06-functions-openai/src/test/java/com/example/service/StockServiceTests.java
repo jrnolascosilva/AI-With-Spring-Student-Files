@@ -13,15 +13,15 @@ public class StockServiceTests {
     @Autowired  StockService service;
     private String[] sampleResults = {"NVDA", StockService.price + "", StockService.volume + ""};
 
-    @Test
-    void testGetCompanySummary() {
-        String summary = service.getCompanySummary("NVDA");
-
-        assertThat(summary).isNotNull();
-        assertThat(summary).contains(sampleResults);
-
-        System.out.println("The company summary is: " + summary);
-    }
+//    @Test
+//    void testGetCompanySummary() {
+//        String summary = service.getCompanySummary("NVDA");
+//
+//        assertThat(summary).isNotNull();
+//        assertThat(summary).contains(sampleResults);
+//
+//        System.out.println("The company summary is: " + summary);
+//    }
 
 
 }

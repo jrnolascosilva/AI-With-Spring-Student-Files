@@ -16,11 +16,12 @@ public class OpenAIClientImpl implements AIClient {
     //  Inject a ChatModel object into the constructor.
     //  Pass the model to the ChatClient.builder to build a ChatClient object.
     //  Save the ChatClient object in the client field.
+    private final StockService stockService;
 
-
-    public OpenAIClientImpl(ChatModel model) {
+    public OpenAIClientImpl(ChatModel model, StockService stockService) {
         this.client = ChatClient.builder(model)
                 .build();
+        this.stockService = stockService;
     }
 
     public String callApi(String input ) {
@@ -38,7 +39,7 @@ public class OpenAIClientImpl implements AIClient {
 
         return this.client.prompt()
                 .user(input)
-                .tools(new StockService()) // Instruct the client to use our "stockService" tool
+                .tools(stockService) // Instruct the client to use our "stockService" tool
                 .call()
                 .content();
     }
