@@ -1,24 +1,27 @@
 package com.example.service;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 //  TODO-10: Define this test class as a Spring Boot test.
 //  Use the @ActiveProfiles annotation to activate the matching embedding model you plan to use.
 //      For Amazon Bedrock,     use "aws".
 //      For standard OpenAI,    use "openai".
 //      For Ollama,             use "ollama".
-
+@SpringBootTest
+@ActiveProfiles("ollama")
 public class EmbeddingServiceTests {
 
-    
+
     //  TODO-11: Use the @Autowired annotation to inject an instance of our EmbeddingService.
+    @Autowired
+    private EmbeddingService service;
 
 
     //  Sample product catalog:
@@ -38,14 +41,16 @@ public class EmbeddingServiceTests {
     //  Capture the result in a String variable.
     //  assertThat the result startsWith "Wireless Headphones".
     //  Print the result to the console:
+        @Test
+        public void testFindClosestMatch() {
+            String result = service.findClosestMatch(query, products);
+            assertThat(result).startsWith("Wireless Headphones:");
+            System.out.println(result);
+        }
 
-
-
-    
     //  TODO-13: Organize your imports and save your work.
     //  Run this test.  It should pass.
     //  The product description for wireless headphones should be displayed.
-
 
 
     //  TODO-14 (OPTIONAL): Instead of using an external model, we can use an internal SpringAI class to create embeddings.
