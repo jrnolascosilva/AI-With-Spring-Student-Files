@@ -30,6 +30,7 @@
           options:
             # Specify the model you want to use.
             # Make sure you have pulled this model locally first!
-            model: llama3.2 #gemma3:4b
+            model: phi4-mini # OK
+                  #gemma3:4b OK
 
 
