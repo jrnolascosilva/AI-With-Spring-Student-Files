@@ -17,15 +17,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 //      For Ollama,             use "ollama".
 
 
-
 // @ActiveProfiles({"simple-vector-store","aws"})
 // @ActiveProfiles({"simple-vector-store","azure"})
 // @ActiveProfiles({"simple-vector-store","openai"})
-// @ActiveProfiles({"simple-vector-store","ollama"})
+@SpringBootTest
+@ActiveProfiles({"simple-vector-store", "ollama"})
 public class AIClientImplTests {
 
     //  TODO-12: Use the @Autowired annotation to inject an instance of the AIClient.
-
+    @Autowired
+    AIClient client;
 
     //  TODO-13: Write a @Test method to validate the AIClient.
     //  First, call the client's save() method with the Utilities.productCatalog list; this populates the test data.
@@ -34,14 +35,17 @@ public class AIClientImplTests {
     //  Use AssertJ's Assertions.assertThat() method to ensure that the content contains expected results.
     //  Utilities.sampleResults array contains the expected results.
     //  Print the response string that is returned.
+    @Test
+    public void testGetProductRecommendations() {
+        client.save(Utilities.productCatalog);
+        String response = client.getProductRecommendations(Utilities.query);
+        System.out.println(response);
 
+        assertThat(response).isNotNull();
+        assertThat(response).contains(Utilities.sampleResults);
+    }
 
     //  TODO-14: Save all work.  Run this test, it should pass.
-
-
-
-
-
 
 
     //  TODO-23 (OPTIONAL):  Alter the @ActiveProfiles annotation at the top of this class.
